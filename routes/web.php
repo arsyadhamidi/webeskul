@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegistrasiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+// Registrasi
+Route::get('/registrasi', [RegistrasiController::class, 'index'])->name('registrasi.index');
+Route::post('/registrasi-action', [RegistrasiController::class, 'store'])->name('registrasi.store');

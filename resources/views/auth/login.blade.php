@@ -67,7 +67,7 @@
                                     </div>
                                     <a href="#" class="auth-link text-black">Lupa password?</a>
                                 </div>
-                                <div class="text-center mt-4 fw-light"> Anda tidak punya akun ? <a href="#"
+                                <div class="text-center mt-4 fw-light"> Anda tidak punya akun ? <a href="{{ route('registrasi.index') }}"
                                         class="text-primary">Register!</a>
                                 </div>
                             </form>
