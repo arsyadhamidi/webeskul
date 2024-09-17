@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminLevelController;
+use App\Http\Controllers\Admin\AdminPembinaController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Middleware\CekLevel;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Pembina
+        Route::get('data-pembina', [AdminPembinaController::class, 'index'])->name('data-pembina.index');
+        Route::get('data-pembina/create', [AdminPembinaController::class, 'create'])->name('data-pembina.create');
+        Route::post('data-pembina/store', [AdminPembinaController::class, 'store'])->name('data-pembina.store');
+        Route::get('data-pembina/edit/{id}', [AdminPembinaController::class, 'edit'])->name('data-pembina.edit');
+        Route::post('data-pembina/update/{id}', [AdminPembinaController::class, 'update'])->name('data-pembina.update');
+        Route::post('data-pembina/destroy/{id}', [AdminPembinaController::class, 'destroy'])->name('data-pembina.destroy');
 
         // Users
         Route::get('data-users', [AdminUsersController::class, 'index'])->name('data-users.index');
