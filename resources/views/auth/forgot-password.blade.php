@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Registrasi | Webeskul </title>
+    <title>Lupa Password | Webeskul </title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/simple-line-icons/css/simple-line-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
-    <script src="{{ asset('admin/assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -23,10 +22,6 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}" />
-    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 </head>
 
 <body>
@@ -39,20 +34,10 @@
                             <div class="brand-logo">
                                 <img src="{{ asset('images/logo.png') }}" alt="logo">
                             </div>
-                            <h4>Form Registrasi</h4>
-                            <h6 class="fw-light">Buat akun anda dengan benar.</h6>
-                            <form class="pt-3" action="{{ route('registrasi.store') }}" method="POST">
+                            <h4>Lupa password ? Masukan username anda</h4>
+                            <h6 class="fw-light">Masuk untuk ubah password.</h6>
+                            <form class="pt-3" action="{{ route('lupa-password.store') }}" method="POST">
                                 @csrf
-                                <div class="form-group">
-                                    <input type="text" name="name"
-                                        class="form-control form-control-lg @error('name') is-invalid @enderror"
-                                        placeholder="Nama Lengkap" value="{{ old('name') }}">
-                                    @error('name')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
                                 <div class="form-group">
                                     <input type="text" name="username"
                                         class="form-control form-control-lg @error('username') is-invalid @enderror"
@@ -63,47 +48,10 @@
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <input type="password" name="password"
-                                        class="form-control form-control-lg @error('password') is-invalid @enderror"
-                                        placeholder="Password">
-                                    @error('password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <select name="level_id" class="form-control @error('level_id') is-invalid @enderror"
-                                        id="pilihStatusAutentikasi">
-                                        <option value="" selected>Pilih Status</option>
-                                        @foreach ($levels as $data)
-                                            <option value="{{ $data->id_level }}"
-                                                {{ old('level_id') == $data->id_level ? 'selected' : '' }}>
-                                                {{ $data->namalevel ?? '-' }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('level_id')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" name="telp"
-                                        class="form-control form-control-lg @error('telp') is-invalid @enderror"
-                                        placeholder="Telp cth : 62821xxxx" value="{{ old('telp') }}">
-                                    @error('telp')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
                                 <div class="mt-3 d-grid gap-2">
-                                    <button type="submit"
-                                        class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn">MASUK</button>
+                                    <button type="submit" class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn">LUPA PASSWORD</button>
                                 </div>
-                                <div class="text-center mt-4 fw-light"> Sudah punya akun ? <a href="/login"
+                                <div class="text-center mt-4 fw-light"> Kembali ke halaman <a href="/login"
                                         class="text-primary">Login!</a>
                                 </div>
                             </form>
@@ -117,6 +65,7 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+    <script src="{{ asset('admin/assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('admin/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -138,13 +87,6 @@
             @if (Session::has('error'))
                 toastr.error("{{ Session::get('error') }}");
             @endif
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#pilihStatusAutentikasi').select2({
-                theme: 'bootstrap4',
-            });
         });
     </script>
     <!-- endinject -->

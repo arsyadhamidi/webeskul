@@ -36,7 +36,8 @@
                             </div>
                             <h4>Hello! Ayo segerakan untuk memulai</h4>
                             <h6 class="fw-light">Login untuk melanjutkan.</h6>
-                            <form class="pt-3">
+                            <form class="pt-3" action="{{ route('login-action.authenticate') }}" method="POST">
+                                @csrf
                                 <div class="form-group">
                                     <input type="text" name="username"
                                         class="form-control form-control-lg @error('username') is-invalid @enderror"
@@ -48,7 +49,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="password"
+                                    <input type="password" name="password"
                                         class="form-control form-control-lg @error('password') is-invalid @enderror"
                                         placeholder="Password">
                                     @error('password')
@@ -63,9 +64,9 @@
                                 <div class="my-2 d-flex justify-content-between align-items-center">
                                     <div class="form-check">
                                         <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input"> Keep me signed in </label>
+                                            <input type="checkbox" class="form-check-input"> Ingat saya </label>
                                     </div>
-                                    <a href="#" class="auth-link text-black">Lupa password?</a>
+                                    <a href="{{ route('lupa-password.index') }}" class="auth-link text-black">Lupa password?</a>
                                 </div>
                                 <div class="text-center mt-4 fw-light"> Anda tidak punya akun ? <a href="{{ route('registrasi.index') }}"
                                         class="text-primary">Register!</a>
@@ -92,6 +93,19 @@
     <script src="{{ asset('admin/assets/js/settings.js') }}"></script>
     <script src="{{ asset('admin/assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('admin/assets/js/todolist.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script>
+        $(document).ready(function() {
+            @if (Session::has('success'))
+                toastr.success("{{ Session::get('success') }}");
+            @endif
+
+            @if (Session::has('error'))
+                toastr.error("{{ Session::get('error') }}");
+            @endif
+        });
+    </script>
     <!-- endinject -->
 </body>
 

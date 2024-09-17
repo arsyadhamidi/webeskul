@@ -11,7 +11,7 @@ class RegistrasiController extends Controller
 {
     public function index()
     {
-        $levels = Level::orderBy('id', 'desc')->get();
+        $levels = Level::latest()->get();
         return view('auth.registrasi', [
             'levels' => $levels,
         ]);
@@ -40,6 +40,6 @@ class RegistrasiController extends Controller
 
         User::create($validated);
 
-        return redirect()->route('/login')->with('success', 'Selamat ! Anda berhasil melakukan registrasi');
+        return redirect()->route('login')->with('success', 'Selamat ! Anda berhasil melakukan registrasi');
     }
 }
