@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminOrangTuaController;
 use App\Http\Controllers\Admin\AdminPembinaController;
+use App\Http\Controllers\Admin\AdminSiswaController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Middleware\CekLevel;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Siswa
+        Route::get('data-siswa', [AdminSiswaController::class, 'index'])->name('data-siswa.index');
+        Route::get('data-siswa/create', [AdminSiswaController::class, 'create'])->name('data-siswa.create');
+        Route::post('data-siswa/store', [AdminSiswaController::class, 'store'])->name('data-siswa.store');
+        Route::get('data-siswa/edit/{id}', [AdminSiswaController::class, 'edit'])->name('data-siswa.edit');
+        Route::post('data-siswa/update/{id}', [AdminSiswaController::class, 'update'])->name('data-siswa.update');
+        Route::post('data-siswa/destroy/{id}', [AdminSiswaController::class, 'destroy'])->name('data-siswa.destroy');
 
         // Orang Tua
         Route::get('data-ortu', [AdminOrangTuaController::class, 'index'])->name('data-ortu.index');
