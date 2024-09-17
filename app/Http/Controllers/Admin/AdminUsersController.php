@@ -67,16 +67,11 @@ class AdminUsersController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
-            'username' => 'required|unique:users,username|max:255',
             'level_id' => 'required',
             'telp' => 'required|digits_between:10,15',
         ], [
             'name.required' => 'Nama wajib diisi.',
             'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
-
-            'username.required' => 'Username wajib diisi.',
-            'username.unique' => 'Username sudah digunakan, silakan pilih yang lain.',
-            'username.max' => 'Username tidak boleh lebih dari 255 karakter.',
 
             'level_id.required' => 'ID Level wajib diisi.',
 
