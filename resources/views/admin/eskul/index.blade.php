@@ -5,47 +5,40 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('data-users.create') }}" class="btn btn-primary">
+                    <a href="{{ route('data-eskul.create') }}" class="btn btn-primary">
                         <i class="fa fa-plus"></i>
                         Tambahkan Data
                     </a>
                 </div>
                 <div class="card-body table-responsive">
-                    <h4 class="card-title">List Data Users Registrasi</h4>
+                    <h4 class="card-title">List Data Eskul</h4>
                     <table class="table table-bordered" id="myTable">
                         <thead>
                             <tr>
                                 <th style="width: 5%">No.</th>
                                 <th>Nama</th>
-                                <th>Username</th>
-                                <th>Status</th>
-                                <th>Telepon</th>
                                 <th>Gambar</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $data)
+                            @foreach ($eskuls as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->name ?? '-' }}</td>
-                                    <td>{{ $data->username ?? '-' }}</td>
-                                    <td>{{ $data->level->namalevel ?? '-' }}</td>
-                                    <td>{{ $data->telp ?? '-' }}</td>
+                                    <td>{{ $data->nama ?? '-' }}</td>
                                     <td>
-                                        @if ($data->foto_profile)
-                                            <img src="{{ asset('storage/' . $data->foto_profile) }}" class="img-fluid"
+                                        @if ($data->gambar_eskul)
+                                            <img src="{{ asset('storage/' . $data->gambar_eskul) }}" class="img-fluid"
                                                 style="width: 50px; height: 50px; object-fit: cover">
                                         @else
-                                            <img src="{{ asset('images/profile.png') }}" class="img-fluid"
-                                                style="width: 50px; height: 50px; object-fit: cover">
+                                            -
                                         @endif
                                     </td>
                                     <td class="d-flex">
-                                        <form action="{{ route('data-users.destroy', $data->id) }}" method="POST"
+                                        <form action="{{ route('data-eskul.destroy', $data->id) }}" method="POST"
                                             class="d-flex">
                                             @csrf
-                                            <a href="{{ route('data-users.edit', $data->id) }}" class="btn btn-sm btn-info">
+                                            <a href="{{ route('data-eskul.edit', $data->id) }}" class="btn btn-sm btn-info">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <button type="submit" class="btn btn-sm btn-danger mx-2" id="hapusData">
@@ -85,7 +78,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Users ?',
+                title: 'Hapus Data Eskul ?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',

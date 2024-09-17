@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminEskulController;
 use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminOrangTuaController;
 use App\Http\Controllers\Admin\AdminPembinaController;
@@ -57,6 +58,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Eskul
+        Route::get('data-eskul', [AdminEskulController::class, 'index'])->name('data-eskul.index');
+        Route::get('data-eskul/create', [AdminEskulController::class, 'create'])->name('data-eskul.create');
+        Route::post('data-eskul/store', [AdminEskulController::class, 'store'])->name('data-eskul.store');
+        Route::get('data-eskul/edit/{id}', [AdminEskulController::class, 'edit'])->name('data-eskul.edit');
+        Route::post('data-eskul/update/{id}', [AdminEskulController::class, 'update'])->name('data-eskul.update');
+        Route::post('data-eskul/destroy/{id}', [AdminEskulController::class, 'destroy'])->name('data-eskul.destroy');
 
         // Siswa
         Route::get('data-siswa', [AdminSiswaController::class, 'index'])->name('data-siswa.index');
