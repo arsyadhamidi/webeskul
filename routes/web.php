@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminLevelController;
+use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Middleware\CekLevel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -53,6 +54,16 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Users
+        Route::get('data-users', [AdminUsersController::class, 'index'])->name('data-users.index');
+        Route::get('data-users/create', [AdminUsersController::class, 'create'])->name('data-users.create');
+        Route::post('data-users/store', [AdminUsersController::class, 'store'])->name('data-users.store');
+        Route::get('data-users/edit/{id}', [AdminUsersController::class, 'edit'])->name('data-users.edit');
+        Route::post('data-users/update/{id}', [AdminUsersController::class, 'update'])->name('data-users.update');
+        Route::post('data-users/destroy/{id}', [AdminUsersController::class, 'destroy'])->name('data-users.destroy');
+
+        // Level
         Route::get('data-level', [AdminLevelController::class, 'index'])->name('data-level.index');
         Route::get('data-level/create', [AdminLevelController::class, 'create'])->name('data-level.create');
         Route::post('data-level/store', [AdminLevelController::class, 'store'])->name('data-level.store');

@@ -136,7 +136,7 @@
                         </a>
                         <div class="collapse" id="form-elements">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="#">User Registrasi</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('data-users.index') }}">User Registrasi</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('data-level.index') }}">Status Autentikasi</a></li>
                             </ul>
                         </div>
