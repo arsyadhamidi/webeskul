@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LupaPasswordController;
-use App\Http\Controllers\Auth\PemulihanPasswordController;
 use App\Http\Controllers\Auth\RegistrasiController;
+use App\Http\Controllers\Setting\SettingController;
+use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Auth\PemulihanPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,12 @@ Route::post('/recorver-password/store', [PemulihanPasswordController::class, 'st
 Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    // Setting
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('/setting/updateprofile', [SettingController::class, 'updateprofile'])->name('setting.updateprofile');
+    Route::post('/setting/updateusername', [SettingController::class, 'updateusername'])->name('setting.updateusername');
+    Route::post('/setting/updatepassword', [SettingController::class, 'updatepassword'])->name('setting.updatepassword');
+    Route::post('/setting/updategambar', [SettingController::class, 'updategambar'])->name('setting.updategambar');
+    Route::post('/setting/hapusgambar', [SettingController::class, 'hapusgambar'])->name('setting.hapusgambar');
 });
