@@ -100,7 +100,8 @@
                                 <p class="fw-light text-muted mb-0">{{ Auth()->user()->username ?? '-' }}</p>
                             </div>
                             <a href="{{ route('setting.index') }}" class="dropdown-item"><i
-                                    class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
+                                    class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My
+                                Profile</a>
                             <a class="dropdown-item"><i
                                     class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i>
                                 FAQ</a>
@@ -126,6 +127,20 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
+                            aria-controls="form-elements">
+                            <i class="menu-icon mdi mdi-account-circle-outline"></i>
+                            <span class="menu-title">Data Autentikasi</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="form-elements">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"><a class="nav-link" href="#">User Registrasi</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('data-level.index') }}">Status Autentikasi</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </nav>
             <!-- partial -->
@@ -137,8 +152,7 @@
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">RSKM Regina Eye
-                            Center .</span>
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Webeskul .</span>
                         <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2024.</span>
                     </div>
                 </footer>
@@ -169,6 +183,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
     @stack('custom-script')
     <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
     <!-- End custom js for this page-->

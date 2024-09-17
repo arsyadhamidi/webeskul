@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminLevelController;
+use App\Http\Middleware\CekLevel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegistrasiController;
@@ -48,4 +50,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/setting/updatepassword', [SettingController::class, 'updatepassword'])->name('setting.updatepassword');
     Route::post('/setting/updategambar', [SettingController::class, 'updategambar'])->name('setting.updategambar');
     Route::post('/setting/hapusgambar', [SettingController::class, 'hapusgambar'])->name('setting.hapusgambar');
+
+    // Admin
+    Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+        Route::get('data-level', [AdminLevelController::class, 'index'])->name('data-level.index');
+        Route::get('data-level/create', [AdminLevelController::class, 'create'])->name('data-level.create');
+        Route::post('data-level/store', [AdminLevelController::class, 'store'])->name('data-level.store');
+        Route::get('data-level/edit/{id}', [AdminLevelController::class, 'edit'])->name('data-level.edit');
+        Route::post('data-level/update/{id}', [AdminLevelController::class, 'update'])->name('data-level.update');
+        Route::post('data-level/destroy/{id}', [AdminLevelController::class, 'destroy'])->name('data-level.destroy');
+    });
 });
