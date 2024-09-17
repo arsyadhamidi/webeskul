@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminLevelController;
+use App\Http\Controllers\Admin\AdminOrangTuaController;
 use App\Http\Controllers\Admin\AdminPembinaController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Middleware\CekLevel;
@@ -55,6 +56,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Orang Tua
+        Route::get('data-ortu', [AdminOrangTuaController::class, 'index'])->name('data-ortu.index');
+        Route::get('data-ortu/create', [AdminOrangTuaController::class, 'create'])->name('data-ortu.create');
+        Route::post('data-ortu/store', [AdminOrangTuaController::class, 'store'])->name('data-ortu.store');
+        Route::get('data-ortu/edit/{id}', [AdminOrangTuaController::class, 'edit'])->name('data-ortu.edit');
+        Route::post('data-ortu/update/{id}', [AdminOrangTuaController::class, 'update'])->name('data-ortu.update');
+        Route::post('data-ortu/destroy/{id}', [AdminOrangTuaController::class, 'destroy'])->name('data-ortu.destroy');
 
         // Pembina
         Route::get('data-pembina', [AdminPembinaController::class, 'index'])->name('data-pembina.index');

@@ -139,6 +139,7 @@
                         <div class="collapse" id="ui-basic">
                           <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ route('data-pembina.index') }}">Data Pembina</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-ortu.index') }}">Data Orang Tua</a></li>
                           </ul>
                         </div>
                       </li>

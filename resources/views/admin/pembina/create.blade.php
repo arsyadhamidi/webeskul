@@ -30,7 +30,7 @@
                                                 {{ $data->name ?? '-' }}</option>
                                         @endforeach
                                     </select>
-                                    @error('level_id')
+                                    @error('users_id')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
