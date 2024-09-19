@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orang_tuas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id');
+            $table->foreignId('siswa_id');
             $table->string('nama');
             $table->string('jk');
             $table->string('telp');

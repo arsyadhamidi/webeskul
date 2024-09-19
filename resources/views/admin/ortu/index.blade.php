@@ -17,6 +17,7 @@
                         <tr>
                             <th style="width: 5%">No.</th>
                             <th>Nama</th>
+                            <th>Siswa</th>
                             <th>Jekel</th>
                             <th>Telepon</th>
                             <th>Alamat</th>
@@ -28,6 +29,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nama ?? '-' }}</td>
+                            <td>{{ $data->siswa->nis ?? '-' }} - {{ $data->siswa->nama ?? '-' }}</td>
                             <td>{{ $data->jk ?? '-' }}</td>
                             <td>{{ $data->telp ?? '-' }}</td>
                             <td>{{ $data->alamat ?? '-' }}</td>

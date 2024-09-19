@@ -39,6 +39,25 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
+                                    <label>Pilih Siswa</label>
+                                    <select name="siswa_id" class="form-control @error('siswa_id') is-invalid @enderror"
+                                        id="pilihSiswa">
+                                        <option value="" selected>Pilih Siswa</option>
+                                        @foreach ($siswas as $data)
+                                            <option value="{{ $data->id }}"
+                                                {{ $ortus->siswa_id == $data->id ? 'selected' : '' }}>{{ $data->nis ?? '-' }}
+                                                - {{ $data->nama ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('siswa_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
                                     <label>Nama Lengkap</label>
                                     <input type="text" name="nama"
                                         class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama', $ortus->nama ?? '-') }}"
@@ -81,7 +100,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label>Alamat</label>
                                     <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" rows="10" cols="10"
@@ -104,6 +123,9 @@
     <script>
         $(document).ready(function() {
             $('#pilihPengguna').select2({
+                theme: 'bootstrap4',
+            });
+            $('#pilihSiswa').select2({
                 theme: 'bootstrap4',
             });
             $('#pilihJenisKelamin').select2({
