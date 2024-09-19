@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminEskulController;
 use App\Http\Controllers\Admin\AdminJurusanController;
+use App\Http\Controllers\Admin\AdminKelasController;
 use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminOrangTuaController;
 use App\Http\Controllers\Admin\AdminPembinaController;
@@ -59,6 +60,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Data Kelas
+        Route::get('data-kelas', [AdminKelasController::class, 'index'])->name('data-kelas.index');
+        Route::get('data-kelas/create', [AdminKelasController::class, 'create'])->name('data-kelas.create');
+        Route::post('data-kelas/store', [AdminKelasController::class, 'store'])->name('data-kelas.store');
+        Route::get('data-kelas/edit/{id}', [AdminKelasController::class, 'edit'])->name('data-kelas.edit');
+        Route::post('data-kelas/update/{id}', [AdminKelasController::class, 'update'])->name('data-kelas.update');
+        Route::post('data-kelas/destroy/{id}', [AdminKelasController::class, 'destroy'])->name('data-kelas.destroy');
 
         // Data Jurusan
         Route::get('data-jurusan', [AdminJurusanController::class, 'index'])->name('data-jurusan.index');
