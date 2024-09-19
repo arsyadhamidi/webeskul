@@ -79,6 +79,39 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label>Pilih Jurusan</label>
+                                    <select name="jurusan_id" class="form-control @error('jurusan_id') is-invalid @enderror"
+                                        id="pilihJurusan">
+                                        <option value="" selected>Pilih Jurusan</option>
+                                        @foreach ($jurusans as $data)
+                                            <option value="{{ $data->id }}"
+                                                {{ old('jurusan_id') == $data->id ? 'selected' : '' }}>
+                                                {{ $data->nama_jurusan ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('jurusan_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label>Pilih Kelas</label>
+                                    <select name="kelas_id" class="form-control @error('kelas_id') is-invalid @enderror"
+                                        id="pilihKelas">
+                                        <option value="" selected>Pilih Kelas</option>
+                                    </select>
+                                    @error('kelas_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,6 +127,40 @@
             });
             $('#pilihJenisKelamin').select2({
                 theme: 'bootstrap4',
+            });
+            $('#pilihKelas').select2({
+                theme: 'bootstrap4',
+            });
+            $('#pilihJurusan').select2({
+                theme: 'bootstrap4',
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#pilihJurusan').on('change', function() {
+                let id_jurusan = $(this).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/jquery-kelas",
+                    data: {
+                        id_jurusan: id_jurusan
+                    },
+                    cache: false,
+                    success: function(data) {
+                        $('#pilihKelas').html(data);
+                    },
+                    error: function(data) {
+                        console.log('error: ', data);
+                    }
+                });
             });
         });
     </script>

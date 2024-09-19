@@ -18,6 +18,8 @@
                             <th style="width: 5%">No.</th>
                             <th>NIS</th>
                             <th>Nama</th>
+                            <th>Jurusan</th>
+                            <th>Kelas</th>
                             <th>Jekel</th>
                             <th>Aksi</th>
                         </tr>
@@ -28,6 +30,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nis ?? '-' }}</td>
                             <td>{{ $data->nama ?? '-' }}</td>
+                            <td>{{ $data->jurusan->nama_jurusan ?? '-' }}</td>
+                            <td>{{ $data->kelas->nama_kelas ?? '-' }}</td>
                             <td>{{ $data->jk ?? '-' }}</td>
                             <td class="d-flex">
                                 <form action="{{ route('data-siswa.destroy', $data->id) }}" method="POST" class="d-flex">

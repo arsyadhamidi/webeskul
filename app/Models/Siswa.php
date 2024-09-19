@@ -15,4 +15,14 @@ class Siswa extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
 }

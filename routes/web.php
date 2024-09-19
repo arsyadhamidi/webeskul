@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('data-siswa/edit/{id}', [AdminSiswaController::class, 'edit'])->name('data-siswa.edit');
         Route::post('data-siswa/update/{id}', [AdminSiswaController::class, 'update'])->name('data-siswa.update');
         Route::post('data-siswa/destroy/{id}', [AdminSiswaController::class, 'destroy'])->name('data-siswa.destroy');
+        Route::post('/jquery-kelas', [AdminSiswaController::class, 'jqueryKelas']);
 
         // Orang Tua
         Route::get('data-ortu', [AdminOrangTuaController::class, 'index'])->name('data-ortu.index');
