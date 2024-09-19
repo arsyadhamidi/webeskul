@@ -11,11 +11,30 @@ use App\Http\Controllers\Controller;
 
 class AdminSiswaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $siswas = Siswa::latest()->get();
+        // Ambil semua jurusan untuk dropdown
+        $jurusans = Jurusan::latest()->get();
+
+        // Query dasar untuk mengambil siswa
+        $query = Siswa::query();
+
+        // Filter berdasarkan jurusan jika ada
+        if ($request->filled('jurusan_id')) {
+            $query->where('jurusan_id', $request->jurusan_id);
+        }
+
+        // Filter berdasarkan kelas jika ada
+        if ($request->filled('kelas_id')) {
+            $query->where('kelas_id', $request->kelas_id);
+        }
+
+        // Ambil siswa berdasarkan filter yang diterapkan
+        $siswas = $query->latest()->get();
+
         return view('admin.siswa.index', [
             'siswas' => $siswas,
+            'jurusans' => $jurusans,
         ]);
     }
 
