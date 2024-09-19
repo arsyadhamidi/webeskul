@@ -144,7 +144,7 @@
                             <li class="nav-item"> <a class="nav-link" href="{{ route('data-pembina.index') }}">Data Pembina</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('data-ortu.index') }}">Data Orang Tua</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('data-siswa.index') }}">Data Siswa</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-eskul.index') }}">Data Eskul</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-eskul.index') }}">Data Ekskul</a></li>
                           </ul>
                         </div>
                       </li>
