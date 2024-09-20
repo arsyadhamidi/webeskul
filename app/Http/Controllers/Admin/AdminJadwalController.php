@@ -9,11 +9,41 @@ use Illuminate\Http\Request;
 
 class AdminJadwalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $jadwals = Jadwal::orderBy('id', 'desc')->get();
+        // Ambil data eskul untuk ditampilkan pada dropdown filter
+        $eskuls = Eskul::latest()->get();
+
+        // Query dasar untuk jadwal
+        $jadwals = Jadwal::query();
+
+        // Filter berdasarkan eskul_id jika dipilih
+        if ($request->eskul_id) {
+            $jadwals->where('eskul_id', $request->eskul_id);
+        }
+
+        // Filter berdasarkan rentang tanggal
+        if ($request->tanggal) {
+            // Misalnya format yang dipilih dari daterangepicker adalah 'YYYY-MM-DD - YYYY-MM-DD'
+            $dates = explode(' - ', $request->tanggal);
+
+            // Pastikan ada dua tanggal yang valid (start dan end)
+            if (count($dates) == 2) {
+                $startDate = $dates[0];
+                $endDate = $dates[1];
+
+                // Filter jadwal yang berada di rentang tanggal
+                $jadwals->whereBetween('tanggal', [$startDate, $endDate]);
+            }
+        }
+
+        // Dapatkan data yang sudah difilter
+        $jadwals = $jadwals->orderBy('id', 'desc')->get();
+
+        // Kembalikan view dengan data jadwal yang sudah difilter
         return view('admin.jadwal.index', [
             'jadwals' => $jadwals,
+            'eskuls' => $eskuls,
         ]);
     }
 

@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}" />
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <style>
         #myTable {
             margin-top: 10px;
