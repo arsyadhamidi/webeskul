@@ -159,6 +159,8 @@
                                             href="{{ route('data-eskul.index') }}">Data Ekskul</a></li>
                                     <li class="nav-item"> <a class="nav-link"
                                             href="{{ route('data-jadwal.index') }}">Jadwal Ekskul</a></li>
+                                    <li class="nav-item"> <a class="nav-link"
+                                            href="{{ route('data-dokumentasi.index') }}">Dokumentasi</a></li>
                                 </ul>
                             </div>
                         </li>

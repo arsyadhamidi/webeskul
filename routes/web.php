@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDokumentasiController;
 use App\Http\Controllers\Admin\AdminEskulController;
 use App\Http\Controllers\Admin\AdminJadwalController;
 use App\Http\Controllers\Admin\AdminJurusanController;
@@ -69,6 +70,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Data Dokumentasi
+        Route::get('data-dokumentasi', [AdminDokumentasiController::class, 'index'])->name('data-dokumentasi.index');
+        Route::get('data-dokumentasi/create', [AdminDokumentasiController::class, 'create'])->name('data-dokumentasi.create');
+        Route::post('data-dokumentasi/store', [AdminDokumentasiController::class, 'store'])->name('data-dokumentasi.store');
+        Route::get('data-dokumentasi/edit/{id}', [AdminDokumentasiController::class, 'edit'])->name('data-dokumentasi.edit');
+        Route::post('data-dokumentasi/update/{id}', [AdminDokumentasiController::class, 'update'])->name('data-dokumentasi.update');
+        Route::post('data-dokumentasi/destroy/{id}', [AdminDokumentasiController::class, 'destroy'])->name('data-dokumentasi.destroy');
 
         // Data Jadwal
         Route::get('data-jadwal', [AdminJadwalController::class, 'index'])->name('data-jadwal.index');
