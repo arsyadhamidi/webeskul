@@ -18,7 +18,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label>Pilih Pengguna</label>
                                     <select name="users_id" class="form-control @error('users_id') is-invalid @enderror"
@@ -28,6 +28,25 @@
                                             <option value="{{ $data->id }}"
                                                 {{ $pembinas->users_id == $data->id ? 'selected' : '' }}>
                                                 {{ $data->name ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('users_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label>Pilih Ektrakurikuler</label>
+                                    <select name="eskul_id" class="form-control @error('eskul_id') is-invalid @enderror"
+                                        id="pilihEskul">
+                                        <option value="" selected>Pilih Ektrakurikuler</option>
+                                        @foreach ($eskuls as $data)
+                                            <option value="{{ $data->id }}"
+                                                {{ $pembinas->eskul_id == $data->id ? 'selected' : '' }}>
+                                                {{ $data->nama ?? '-' }}</option>
                                         @endforeach
                                     </select>
                                     @error('users_id')

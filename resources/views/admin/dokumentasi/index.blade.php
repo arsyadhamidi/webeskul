@@ -1,6 +1,44 @@
 @extends('admin.layout.master')
 
 @section('content')
+    <div class="row mb-4">
+        <div class="col-lg">
+            <form action="{{ route('data-dokumentasi.index') }}" method="GET">
+                @csrf
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Filter Dokumentasi</h4>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="mb-3">
+                                    <select name="eskul_id" class="form-control @error('eskul_id') is-invalid @enderror"
+                                        id="pilihEskul">
+                                        <option value="" selected>Pilih Ekstrakurikuler</option>
+                                        @foreach ($eskuls as $data)
+                                            <option value="{{ $data->id }}"
+                                                {{ request('eskul_id') == $data->id ? 'selected' : '' }}>
+                                                {{ $data->nama ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('eskul_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <button type="submit" class="btn btn-sm btn-info">
+                                    <i class="fa fa-search"></i>
+                                    Cari Dokumentasi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg">
             <div class="card">
@@ -43,7 +81,8 @@
                                         <form action="{{ route('data-dokumentasi.destroy', $data->id) }}" method="POST"
                                             class="d-flex">
                                             @csrf
-                                            <a href="{{ route('data-dokumentasi.edit', $data->id) }}" class="btn btn-sm btn-info">
+                                            <a href="{{ route('data-dokumentasi.edit', $data->id) }}"
+                                                class="btn btn-sm btn-info">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <button type="submit" class="btn btn-sm btn-danger mx-2" id="hapusData">
@@ -61,6 +100,13 @@
     </div>
 @endsection
 @push('custom-script')
+    <script>
+        $(document).ready(function() {
+            $('#pilihEskul').select2({
+                theme: 'bootstrap4',
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             @if (Session::has('success'))

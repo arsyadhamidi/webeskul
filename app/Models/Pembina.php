@@ -15,4 +15,9 @@ class Pembina extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
+
+    public function eskul()
+    {
+        return $this->belongsTo(Eskul::class, 'eskul_id');
+    }
 }

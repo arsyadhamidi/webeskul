@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Eskul;
 use App\Models\Pembina;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,8 +21,10 @@ class AdminPembinaController extends Controller
     public function create()
     {
         $users = User::where('level_id', '2')->get();
+        $eskuls = Eskul::latest()->get();
         return view('admin.pembina.create', [
             'users' => $users,
+            'eskuls' => $eskuls,
         ]);
     }
 
@@ -29,12 +32,15 @@ class AdminPembinaController extends Controller
     {
         $validated = $request->validate([
             'users_id' => 'required',
+            'eskul_id' => 'required',
             'nip' => 'required|unique:pembinas,nip|max:255',
             'nama' => 'required|max:255',
             'jk' => 'required|max:255',
             'telp' => 'required|max:255',
         ], [
             'users_id.required' => 'ID Pengguna wajib diisi.',
+
+            'eskul_id.required' => 'Ekstrakurikuler wajib diisi.',
 
             'nip.required' => 'NIP wajib diisi.',
             'nip.unique' => 'NIP sudah terdaftar, silakan gunakan NIP lain.',
@@ -59,9 +65,11 @@ class AdminPembinaController extends Controller
     {
         $users = User::where('level_id', '2')->get();
         $pembinas = Pembina::where('id', $id)->first();
+        $eskuls = Eskul::latest()->get();
         return view('admin.pembina.edit', [
             'pembinas' => $pembinas,
             'users' => $users,
+            'eskuls' => $eskuls,
         ]);
     }
 
@@ -69,11 +77,14 @@ class AdminPembinaController extends Controller
     {
         $validated = $request->validate([
             'users_id' => 'required',
+            'eskul_id' => 'required',
             'nama' => 'required|max:255',
             'jk' => 'required|max:255',
             'telp' => 'required|max:255',
         ], [
             'users_id.required' => 'ID Pengguna wajib diisi.',
+
+            'eskul_id.required' => 'Ekstrakurikuler wajib diisi.',
 
             'nama.required' => 'Nama wajib diisi.',
             'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',

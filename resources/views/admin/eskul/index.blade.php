@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body table-responsive">
                     <h4 class="card-title">List Data Ekstrakurikuler</h4>
-                    <table class="table table-bordered" id="myTable">
+                    <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>
                                 <th style="width: 5%">No.</th>
@@ -34,7 +34,7 @@
                                             -
                                         @endif
                                     </td>
-                                    <td class="d-flex">
+                                    <td>
                                         <form action="{{ route('data-eskul.destroy', $data->id) }}" method="POST"
                                             class="d-flex">
                                             @csrf

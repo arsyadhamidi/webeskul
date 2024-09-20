@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pembinas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id');
+            $table->foreignId('eskul_id');
             $table->string('nip')->unique();
             $table->string('nama');
             $table->string('jk');

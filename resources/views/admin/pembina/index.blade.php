@@ -18,6 +18,7 @@
                             <th style="width: 5%">No.</th>
                             <th>NIP</th>
                             <th>Nama</th>
+                            <th>Ekstrakurikuler</th>
                             <th>Jekel</th>
                             <th>Telepon</th>
                             <th>Aksi</th>
@@ -29,6 +30,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nip ?? '-' }}</td>
                             <td>{{ $data->nama ?? '-' }}</td>
+                            <td>{{ $data->eskul->nama ?? '-' }}</td>
                             <td>{{ $data->jk ?? '-' }}</td>
                             <td>{{ $data->telp ?? '-' }}</td>
                             <td class="d-flex">

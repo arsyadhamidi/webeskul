@@ -78,6 +78,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('data-dokumentasi/edit/{id}', [AdminDokumentasiController::class, 'edit'])->name('data-dokumentasi.edit');
         Route::post('data-dokumentasi/update/{id}', [AdminDokumentasiController::class, 'update'])->name('data-dokumentasi.update');
         Route::post('data-dokumentasi/destroy/{id}', [AdminDokumentasiController::class, 'destroy'])->name('data-dokumentasi.destroy');
+        Route::post('jquery-eskul', [AdminDokumentasiController::class, 'jqueryEskul']);
 
         // Data Jadwal
         Route::get('data-jadwal', [AdminJadwalController::class, 'index'])->name('data-jadwal.index');

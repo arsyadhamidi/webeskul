@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('eskul_id');
             $table->foreignId('pembina_id');
+            $table->date('tanggal');
             $table->string('kegiatan');
             $table->string('galeri');
             $table->timestamps();

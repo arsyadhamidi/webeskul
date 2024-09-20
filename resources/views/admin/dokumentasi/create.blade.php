@@ -43,11 +43,6 @@
                                     <select name="pembina_id" class="form-control @error('pembina_id') is-invalid @enderror"
                                         id="pilihPembina">
                                         <option value="" selected>Pilih Pembina</option>
-                                        @foreach ($pembinas as $data)
-                                            <option value="{{ $data->id }}"
-                                                {{ old('pembina_id') == $data->id ? 'selected' : '' }}>
-                                                {{ $data->nama ?? '-' }}</option>
-                                        @endforeach
                                     </select>
                                     @error('pembina_id')
                                         <div class="invalid-feedback">
@@ -97,6 +92,34 @@
             });
             $('#pilihPembina').select2({
                 theme: 'bootstrap4',
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#pilihEskul').on('change', function() {
+                let id_eskul = $(this).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/jquery-eskul",
+                    data: {
+                        id_eskul: id_eskul
+                    },
+                    cache: false,
+                    success: function(data) {
+                        $('#pilihPembina').html(data);
+                    },
+                    error: function(data) {
+                        console.log('error: ', data);
+                    }
+                });
             });
         });
     </script>

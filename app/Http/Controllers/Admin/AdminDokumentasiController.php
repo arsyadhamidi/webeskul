@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Dokumentasi;
 use App\Models\Pembina;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class AdminDokumentasiController extends Controller
@@ -76,6 +77,8 @@ class AdminDokumentasiController extends Controller
             'galeri.max' => 'Galeri tidak boleh lebih dari 10MB.'  // Pesan error jika ukuran file lebih dari 10MB
         ]);
 
+        $validated['tanggal'] = Carbon::now();
+
         if($request->file('galeri')){
             $validated['galeri'] = $request->file('galeri')->store('galeri');
         }
@@ -135,5 +138,16 @@ class AdminDokumentasiController extends Controller
         $dokumentasi->delete();
 
         return redirect()->route('data-dokumentasi.index')->with('success', 'Selamat ! Anda berhasil memperbaharui data !');
+    }
+
+    public function jqueryEskul(Request $request)
+    {
+        $id_eskul = $request->id_eskul;
+
+        $pembinas = Pembina::where('eskul_id', $id_eskul)->get();
+
+        foreach ($pembinas as $data) {
+            echo "<option value='$data->id'>$data->nama</option>";
+        }
     }
 }
