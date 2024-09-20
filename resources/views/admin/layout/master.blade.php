@@ -132,33 +132,48 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                          <i class="menu-icon mdi mdi-floor-plan"></i>
-                          <span class="menu-title">Data Master</span>
-                          <i class="menu-arrow"></i>
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                            aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-floor-plan"></i>
+                            <span class="menu-title">Data Master</span>
+                            <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
-                          <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-jurusan.index') }}">Data Jurusan</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-kelas.index') }}">Data Kelas</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-pembina.index') }}">Data Pembina</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-ortu.index') }}">Data Orang Tua</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-siswa.index') }}">Data Siswa</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('data-eskul.index') }}">Data Ekskul</a></li>
-                          </ul>
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('data-jurusan.index') }}">Data Jurusan</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('data-kelas.index') }}">Data Kelas</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('data-pembina.index') }}">Data Pembina</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('data-ortu.index') }}">Data
+                                        Orang Tua</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('data-siswa.index') }}">Data Siswa</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('data-eskul.index') }}">Data Ekskul</a></li>
+                            </ul>
                         </div>
-                      </li>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
-                            aria-controls="form-elements">
+                        <a class="nav-link" href="{{ route('data-pendaftaran.index') }}">
+                            <i class="mdi mdi-card-text-outline menu-icon"></i>
+                            <span class="menu-title">Pendaftaran</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#data-autentikasi" aria-expanded="false"
+                            aria-controls="data-autentikasi">
                             <i class="menu-icon mdi mdi-account-circle-outline"></i>
                             <span class="menu-title">Data Autentikasi</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="form-elements">
+                        <div class="collapse" id="data-autentikasi">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('data-users.index') }}">User Registrasi</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('data-level.index') }}">Status Autentikasi</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('data-users.index') }}">User
+                                        Registrasi</a></li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="{{ route('data-level.index') }}">Status Autentikasi</a></li>
                             </ul>
                         </div>
                     </li>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminKelasController;
 use App\Http\Controllers\Admin\AdminLevelController;
 use App\Http\Controllers\Admin\AdminOrangTuaController;
 use App\Http\Controllers\Admin\AdminPembinaController;
+use App\Http\Controllers\Admin\AdminPendaftaranController;
 use App\Http\Controllers\Admin\AdminSiswaController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Middleware\CekLevel;
@@ -60,6 +61,15 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Data Pendaftaran
+        Route::get('data-pendaftaran', [AdminPendaftaranController::class, 'index'])->name('data-pendaftaran.index');
+        Route::get('data-pendaftaran/create', [AdminPendaftaranController::class, 'create'])->name('data-pendaftaran.create');
+        Route::post('data-pendaftaran/store', [AdminPendaftaranController::class, 'store'])->name('data-pendaftaran.store');
+        Route::get('data-pendaftaran/edit/{id}', [AdminPendaftaranController::class, 'edit'])->name('data-pendaftaran.edit');
+        Route::get('data-pendaftaran/show/{id}', [AdminPendaftaranController::class, 'show'])->name('data-pendaftaran.show');
+        Route::post('data-pendaftaran/update/{id}', [AdminPendaftaranController::class, 'update'])->name('data-pendaftaran.update');
+        Route::post('data-pendaftaran/destroy/{id}', [AdminPendaftaranController::class, 'destroy'])->name('data-pendaftaran.destroy');
 
         // Data Kelas
         Route::get('data-kelas', [AdminKelasController::class, 'index'])->name('data-kelas.index');
