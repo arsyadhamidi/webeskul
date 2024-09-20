@@ -51,6 +51,13 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
+    // Siswa
+    Route::get('/isi-biodata/siswa', [DashboardController::class, 'isibiodatasiswa']);
+    Route::post('/edit-biodata/siswa/store', [DashboardController::class, 'storebiodatasiswa']);
+    Route::get('/edit-biodata/siswa/{id}', [DashboardController::class, 'editbiodatasiswa']);
+    Route::post('/edit-biodata/siswa/update/{id}', [DashboardController::class, 'updatebiodatasiswa']);
+    Route::post('/jquery-kelas/dashboard', [DashboardController::class, 'jqueryKelas']);
+
     // Setting
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::post('/setting/updateprofile', [SettingController::class, 'updateprofile'])->name('setting.updateprofile');
