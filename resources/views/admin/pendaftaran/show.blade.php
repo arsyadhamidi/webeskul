@@ -16,6 +16,22 @@
                             <th colspan="3">Biodata</th>
                         </tr>
                         <tr>
+                            <td style="width: 20%">Nomor Pendaftaran</td>
+                            <td style="width: 5%">:</td>
+                            <td>
+                                <span class="badge badge-info">
+                                    {{ $daftars->nomor_pendaftaran ?? '0' }}
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20%">Tanggal Pendaftaran</td>
+                            <td style="width: 5%">:</td>
+                            <td>
+                                {{ \Carbon\Carbon::parse($daftars->tgl_pendaftaran)->format('d F Y') }}
+                            </td>
+                        </tr>
+                        <tr>
                             <td style="width: 20%">NISN</td>
                             <td style="width: 5%">:</td>
                             <td>{{ $daftars->nis ?? '-' }}</td>

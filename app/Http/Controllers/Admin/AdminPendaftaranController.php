@@ -2,20 +2,60 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Eskul;
-use App\Models\Pendaftaran;
 use App\Models\Siswa;
+use App\Models\Jurusan;
+use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class AdminPendaftaranController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $daftars = Pendaftaran::orderBy('id', 'desc')->get();
+        // Ambil input dari request
+        $eskulId = $request->input('eskul_id');
+        $jurusanId = $request->input('jurusan_id');
+        $kelasId = $request->input('kelas_id');
+        $status = $request->input('status');
+
+        // Query dasar untuk mengambil data pendaftaran
+        $query = Pendaftaran::query();
+
+        // Filter berdasarkan Ekskul jika dipilih
+        if (!empty($eskulId)) {
+            $query->where('eskul_id', $eskulId);
+        }
+
+        // Filter berdasarkan Jurusan jika dipilih
+        if (!empty($jurusanId)) {
+            $query->where('jurusan_id', $jurusanId);
+        }
+
+        // Filter berdasarkan Kelas jika dipilih
+        if (!empty($kelasId)) {
+            $query->where('kelas_id', $kelasId);
+        }
+
+        // Filter berdasarkan Status jika dipilih
+        if (!empty($status)) {
+            $query->where('status', $status);
+        }
+
+        // Dapatkan hasil dengan filter yang diterapkan
+        $daftars = $query->orderBy('id', 'desc')->get();
+
+        // Dapatkan semua eskul dan jurusan untuk pilihan filter
+        $eskuls = Eskul::latest()->get();
+        $jurusans = Jurusan::latest()->get();
+
+        // Kirim data ke view
         return view('admin.pendaftaran.index', [
             'daftars' => $daftars,
+            'eskuls' => $eskuls,
+            'jurusans' => $jurusans,
         ]);
     }
 
@@ -80,10 +120,17 @@ class AdminPendaftaranController extends Controller
 
         // Ambil data siswa berdasarkan ID
         $siswa = Siswa::findOrFail($request->siswa_id);
+        $daftars = Pendaftaran::count();
+        $totCount = $daftars + 1;
+
+        $carbons = Carbon::now();
+        $toDays = $carbons->format('dmY');
 
         // Set jurusan dan kelas dari data siswa
         $validated['jurusan_id'] = $siswa->jurusan_id;
         $validated['kelas_id'] = $siswa->kelas_id;
+        $validated['nomor_pendaftaran'] = 'EKS' . $toDays . $totCount;
+        $validated['tgl_pendaftaran'] = $carbons;
 
         // Simpan data pendaftaran
         Pendaftaran::create($validated);

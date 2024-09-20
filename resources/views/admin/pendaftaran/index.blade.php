@@ -1,6 +1,97 @@
 @extends('admin.layout.master')
 
 @section('content')
+    <div class="row mb-4">
+        <div class="col-lg">
+            <form action="{{ route('data-pendaftaran.index') }}" method="GET">
+                @csrf
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Filter Data Pendaftaran</h4>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="mb-3">
+                                    <label>Pilih Ekskul</label>
+                                    <select name="eskul_id" class="form-control @error('eskul_id') is-invalid @enderror"
+                                        id="pilihEskul">
+                                        <option value="" selected>Pilih Ekskul</option>
+                                        @foreach ($eskuls as $data)
+                                            <option value="{{ $data->id }}"
+                                                {{ request('eskul_id') == $data->id ? 'selected' : '' }}>
+                                                {{ $data->nama ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('eskul_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="mb-3">
+                                    <label>Pilih Jurusan</label>
+                                    <select name="jurusan_id" class="form-control @error('jurusan_id') is-invalid @enderror"
+                                        id="pilihJurusan">
+                                        <option value="" selected>Pilih Jurusan</option>
+                                        @foreach ($jurusans as $data)
+                                            <option value="{{ $data->id }}"
+                                                {{ request('jurusan_id') == $data->id ? 'selected' : '' }}>
+                                                {{ $data->nama_jurusan ?? '-' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('jurusan_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="mb-3">
+                                    <label>Pilih Kelas</label>
+                                    <select name="kelas_id" class="form-control @error('kelas_id') is-invalid @enderror"
+                                        id="pilihKelas">
+                                        <option value="" selected>Pilih Kelas</option>
+                                    </select>
+                                    @error('kelas_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="mb-3">
+                                    <label>Pilih Status</label>
+                                    <select name="status" class="form-control @error('status') is-invalid @enderror"
+                                        id="pilihStatus">
+                                        <option value="" selected>Pilih Status</option>
+                                        <option value="Diterima" {{ request('status') == 'Diterima' ? 'selected' : '' }}>Diterima</option>
+                                        <option value="Proses" {{ request('status') == 'Proses' ? 'selected' : '' }}>Proses</option>
+                                        <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                    </select>
+                                    @error('status')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-sm btn-info">
+                                        <i class="fa fa-search"></i>
+                                        Filter Pendaftaran
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg">
             <div class="card">
@@ -16,6 +107,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 5%">No.</th>
+                                <th>No. Pendaftaran</th>
                                 <th>Nama</th>
                                 <th>TTL</th>
                                 <th>Ekskul</th>
@@ -31,6 +123,11 @@
                             @foreach ($daftars as $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <span class="badge badge-info">
+                                            {{ $data->nomor_pendaftaran ?? '0' }}
+                                        </span>
+                                    </td>
                                     <td>
                                         {{ $data->nama ?? '-' }}
                                         <p><span class="text-muted"><small>{{ $data->nis ?? '0' }}</small></span></p>
@@ -79,6 +176,50 @@
     </div>
 @endsection
 @push('custom-script')
+    <script>
+        $(document).ready(function() {
+            $('#pilihEskul').select2({
+                theme: 'bootstrap4',
+            });
+            $('#pilihJurusan').select2({
+                theme: 'bootstrap4',
+            });
+            $('#pilihKelas').select2({
+                theme: 'bootstrap4',
+            });
+            $('#pilihStatus').select2({
+                theme: 'bootstrap4',
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#pilihJurusan').on('change', function() {
+                let id_jurusan = $(this).val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/jquery-kelas",
+                    data: {
+                        id_jurusan: id_jurusan
+                    },
+                    cache: false,
+                    success: function(data) {
+                        $('#pilihKelas').html(data);
+                    },
+                    error: function(data) {
+                        console.log('error: ', data);
+                    }
+                });
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             @if (Session::has('success'))

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('siswa_id');
             $table->foreignId('jurusan_id');
             $table->foreignId('kelas_id');
+            $table->string('nomor_pendaftaran');
+            $table->string('tgl_pendaftaran');
             $table->string('nis');
             $table->string('nama');
             $table->string('tmp_lahir');
