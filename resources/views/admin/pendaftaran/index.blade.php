@@ -102,7 +102,7 @@
                     </a>
                 </div>
                 <div class="card-body table-responsive">
-                    <h4 class="card-title">List Data Status Autentikasi</h4>
+                    <h4 class="card-title">List Data Pendaftaran</h4>
                     <table class="table table-bordered table-striped" id="myTable">
                         <thead>
                             <tr>

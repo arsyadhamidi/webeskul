@@ -1,59 +1,55 @@
 @extends('admin.layout.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg">
-            <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('data-eskul.create') }}" class="btn btn-primary">
-                        <i class="fa fa-plus"></i>
-                        Tambahkan Data
-                    </a>
-                </div>
-                <div class="card-body table-responsive">
-                    <h4 class="card-title">List Data Ekstrakurikuler</h4>
-                    <table class="table table-bordered" id="myTable">
-                        <thead>
-                            <tr>
-                                <th style="width: 5%">No.</th>
-                                <th>Nama</th>
-                                <th>Gambar</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($eskuls as $data)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->nama ?? '-' }}</td>
-                                    <td>
-                                        @if ($data->gambar_eskul)
-                                            <img src="{{ asset('storage/' . $data->gambar_eskul) }}" class="img-fluid"
-                                                style="width: 50px; height: 50px; object-fit: cover">
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
-                                    <td class="d-flex">
-                                        <form action="{{ route('data-eskul.destroy', $data->id) }}" method="POST"
-                                            class="d-flex">
-                                            @csrf
-                                            <a href="{{ route('data-eskul.edit', $data->id) }}" class="btn btn-sm btn-info">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <button type="submit" class="btn btn-sm btn-danger mx-2" id="hapusData">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+<div class="row">
+    <div class="col-lg">
+        <div class="card">
+            <div class="card-header">
+                <a href="{{ route('data-jadwal.create') }}" class="btn btn-primary">
+                    <i class="fa fa-plus"></i>
+                    Tambahkan Data
+                </a>
+            </div>
+            <div class="card-body table-responsive">
+                <h4 class="card-title">List Data Jadwal Esktrakurikuler</h4>
+                <table class="table table-bordered table-striped" id="myTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">No.</th>
+                            <th>Ekskul</th>
+                            <th>Tanggal</th>
+                            <th>Lokasi</th>
+                            <th>Deskripsi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($jadwals as $data)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $data->eskul->nama ?? '-' }}</td>
+                            <td>{{ \Carbon\Carbon::parse($data->tanggal)->format('d F Y') }}</td>
+                            <td>{{ $data->lokasi ?? '-' }}</td>
+                            <td>{{ $data->deskripsi ?? '-' }}</td>
+                            <td class="d-flex">
+                                <form action="{{ route('data-jadwal.destroy', $data->id) }}" method="POST" class="d-flex">
+                                    @csrf
+                                    <a href="{{ route('data-jadwal.edit', $data->id) }}" class="btn btn-sm btn-info">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <button type="submit" class="btn btn-sm btn-danger mx-2" id="hapusData">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 @endsection
 @push('custom-script')
     <script>
@@ -78,7 +74,7 @@
             // Tampilkan SweetAlert saat tombol di klik
             Swal.fire({
                 icon: 'question',
-                title: 'Hapus Data Eskul ?',
+                title: 'Hapus Data Jadwal ?',
                 text: 'Apakah anda yakin untuk menghapus data ini?',
                 showCancelButton: true, // Tampilkan tombol batal
                 confirmButtonText: 'Ya',

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminEskulController;
+use App\Http\Controllers\Admin\AdminJadwalController;
 use App\Http\Controllers\Admin\AdminJurusanController;
 use App\Http\Controllers\Admin\AdminKelasController;
 use App\Http\Controllers\Admin\AdminLevelController;
@@ -68,6 +69,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Data Jadwal
+        Route::get('data-jadwal', [AdminJadwalController::class, 'index'])->name('data-jadwal.index');
+        Route::get('data-jadwal/create', [AdminJadwalController::class, 'create'])->name('data-jadwal.create');
+        Route::post('data-jadwal/store', [AdminJadwalController::class, 'store'])->name('data-jadwal.store');
+        Route::get('data-jadwal/edit/{id}', [AdminJadwalController::class, 'edit'])->name('data-jadwal.edit');
+        Route::post('data-jadwal/update/{id}', [AdminJadwalController::class, 'update'])->name('data-jadwal.update');
+        Route::post('data-jadwal/destroy/{id}', [AdminJadwalController::class, 'destroy'])->name('data-jadwal.destroy');
 
         // Data Pendaftaran
         Route::get('data-pendaftaran', [AdminPendaftaranController::class, 'index'])->name('data-pendaftaran.index');
