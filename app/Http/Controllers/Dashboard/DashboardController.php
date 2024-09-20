@@ -7,13 +7,55 @@ use App\Models\Siswa;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Jadwal;
+use App\Models\Level;
+use App\Models\OrangTua;
+use App\Models\Pembina;
+use App\Models\Pendaftaran;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard.index');
+        $users = User::count();
+        $levels = Level::count();
+        $jurusans = Jurusan::count();
+        $kelas = Kelas::count();
+        $pembinas = Pembina::count();
+        $ortus = OrangTua::count();
+        $siswas = Siswa::count();
+        $eskuls = Siswa::count();
+        $jadwals = Jadwal::count();
+        $pendaftarans = Pendaftaran::count();
+        $dokumentasis = Jadwal::count();
+
+        // Menghitung pendaftaran per bulan untuk tahun berjalan
+        $pendaftarPerBulan = Pendaftaran::selectRaw('MONTH(tgl_pendaftaran) as bulan, COUNT(*) as jumlah')
+            ->whereYear('created_at', date('Y'))  // Mengambil data hanya untuk tahun berjalan
+            ->groupBy('bulan')
+            ->pluck('jumlah', 'bulan');           // Menghasilkan array dengan key = bulan dan value = jumlah pendaftar
+
+        // Data untuk chart
+        $dataPendaftar = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $dataPendaftar[] = $pendaftarPerBulan->get($i, 0);  // Jika tidak ada data untuk bulan tersebut, set 0
+        }
+        return view('admin.dashboard.index', [
+            'users' => $users,
+            'levels' => $levels,
+            'jurusans' => $jurusans,
+            'kelas' => $kelas,
+            'pembinas' => $pembinas,
+            'ortus' => $ortus,
+            'siswas' => $siswas,
+            'eskuls' => $eskuls,
+            'jadwals' => $jadwals,
+            'dokumentasis' => $dokumentasis,
+            'pendaftarans' => $pendaftarans,
+            'dataPendaftar' => $dataPendaftar,
+        ]);
     }
 
     public function isibiodatasiswa()
