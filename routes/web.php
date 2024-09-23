@@ -53,6 +53,12 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
+    // Pembina
+    Route::get('/isi-biodata/pembina', [DashboardController::class, 'isibiodatapembina']);
+    Route::post('/edit-biodata/pembina/store', [DashboardController::class, 'storebiodatapembina']);
+    Route::get('/edit-biodata/pembina/{id}', [DashboardController::class, 'editbiodatapembina']);
+    Route::post('/edit-biodata/pembina/update/{id}', [DashboardController::class, 'updatebiodatapembina']);
+
     // Siswa
     Route::get('/isi-biodata/siswa', [DashboardController::class, 'isibiodatasiswa']);
     Route::post('/edit-biodata/siswa/store', [DashboardController::class, 'storebiodatasiswa']);

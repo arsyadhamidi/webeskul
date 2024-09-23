@@ -7,6 +7,7 @@ use App\Models\Siswa;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Eskul;
 use App\Models\Jadwal;
 use App\Models\Level;
 use App\Models\OrangTua;
@@ -58,6 +59,7 @@ class DashboardController extends Controller
         ]);
     }
 
+    // Siswa
     public function isibiodatasiswa()
     {
         $jurusans = Jurusan::latest()->get();
@@ -132,6 +134,101 @@ class DashboardController extends Controller
         $validated['users_id'] = Auth::user()->id;
 
         Siswa::where('id', $id)->update($validated);
+
+        return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil memperbaharui data !');
+    }
+
+
+    // Pembina
+    public function isibiodatapembina()
+    {
+        $eskuls = Eskul::latest()->get();
+        return view('pembina.isi-biodata', [
+            'eskuls' => $eskuls,
+        ]);
+    }
+
+    public function storebiodatapembina(Request $request)
+    {
+        $validated = $request->validate([
+            'eskul_id' => 'required',
+            'nip' => 'required|max:255',
+            'nama' => 'required|max:255',
+            'jk' => 'required|max:255',
+            'telp' => 'required|min:10|max:15',
+        ], [
+            // Pesan untuk eskul_id
+            'eskul_id.required' => 'Ekstrakurikuler wajib dipilih.',
+
+            // Pesan untuk nip
+            'nip.required' => 'NIP wajib diisi.',
+            'nip.max' => 'NIP tidak boleh lebih dari 255 karakter.',
+
+            // Pesan untuk nama
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
+            // Pesan untuk jk (jenis kelamin)
+            'jk.required' => 'Jenis kelamin wajib diisi.',
+            'jk.max' => 'Jenis kelamin tidak boleh lebih dari 255 karakter.',
+
+            // Pesan untuk telp (nomor telepon)
+            'telp.required' => 'Nomor telepon wajib diisi.',
+            'telp.min' => 'Nomor telepon minimal 10 karakter.',
+            'telp.max' => 'Nomor telepon tidak boleh lebih dari 15 karakter.',
+        ]);
+
+
+        $validated['users_id'] = Auth::user()->id;
+
+        Pembina::create($validated);
+
+        return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil menambahkan data !');
+    }
+
+    public function editbiodatapembina($id)
+    {
+        $pembinas = Pembina::where('id', $id)->first();
+        $eskuls = Eskul::latest()->get();
+        return view('pembina.edit-biodata', [
+            'pembinas' => $pembinas,
+            'eskuls' => $eskuls,
+        ]);
+    }
+
+    public function updatebiodatapembina(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'eskul_id' => 'required',
+            'nip' => 'required|max:255',
+            'nama' => 'required|max:255',
+            'jk' => 'required|max:255',
+            'telp' => 'required|min:10|max:15',
+        ], [
+            // Pesan untuk eskul_id
+            'eskul_id.required' => 'Ekstrakurikuler wajib dipilih.',
+
+            // Pesan untuk nip
+            'nip.required' => 'NIP wajib diisi.',
+            'nip.max' => 'NIP tidak boleh lebih dari 255 karakter.',
+
+            // Pesan untuk nama
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
+            // Pesan untuk jk (jenis kelamin)
+            'jk.required' => 'Jenis kelamin wajib diisi.',
+            'jk.max' => 'Jenis kelamin tidak boleh lebih dari 255 karakter.',
+
+            // Pesan untuk telp (nomor telepon)
+            'telp.required' => 'Nomor telepon wajib diisi.',
+            'telp.min' => 'Nomor telepon minimal 10 karakter.',
+            'telp.max' => 'Nomor telepon tidak boleh lebih dari 15 karakter.',
+        ]);
+
+        $validated['users_id'] = Auth::user()->id;
+
+        Pembina::where('id', $id)->update($validated);
 
         return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil memperbaharui data !');
     }
