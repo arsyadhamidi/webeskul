@@ -19,6 +19,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\PemulihanPasswordController;
+use App\Http\Controllers\Pembina\PembinaPendaftaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -167,5 +168,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('data-level/edit/{id}', [AdminLevelController::class, 'edit'])->name('data-level.edit');
         Route::post('data-level/update/{id}', [AdminLevelController::class, 'update'])->name('data-level.update');
         Route::post('data-level/destroy/{id}', [AdminLevelController::class, 'destroy'])->name('data-level.destroy');
+    });
+
+    // Pembina
+    Route::group(['middleware' => [CekLevel::class . ':2']], function () {
+        // Data Pendaftaran
+        Route::get('pembina-pendaftaran', [PembinaPendaftaranController::class, 'index'])->name('pembina-pendaftaran.index');
+        Route::get('pembina-pendaftaran/create', [PembinaPendaftaranController::class, 'create'])->name('pembina-pendaftaran.create');
+        Route::post('pembina-pendaftaran/store', [PembinaPendaftaranController::class, 'store'])->name('pembina-pendaftaran.store');
+        Route::get('pembina-pendaftaran/edit/{id}', [PembinaPendaftaranController::class, 'edit'])->name('pembina-pendaftaran.edit');
+        Route::get('pembina-pendaftaran/show/{id}', [PembinaPendaftaranController::class, 'show'])->name('pembina-pendaftaran.show');
+        Route::post('pembina-pendaftaran/update/{id}', [PembinaPendaftaranController::class, 'update'])->name('pembina-pendaftaran.update');
+        Route::post('pembina-pendaftaran/destroy/{id}', [PembinaPendaftaranController::class, 'destroy'])->name('pembina-pendaftaran.destroy');
+        Route::post('/jquery-kelas/pembina', [PembinaPendaftaranController::class, 'jqueryKelas']);
     });
 });
