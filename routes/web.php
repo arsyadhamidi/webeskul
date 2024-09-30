@@ -19,6 +19,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\PemulihanPasswordController;
+use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
 
 /*
@@ -172,6 +173,15 @@ Route::middleware(['auth'])->group(function () {
 
     // Pembina
     Route::group(['middleware' => [CekLevel::class . ':2']], function () {
+
+        // Data Jadwal
+        Route::get('pembina-jadwal', [PembinaJadwalController::class, 'index'])->name('pembina-jadwal.index');
+        Route::get('pembina-jadwal/create', [PembinaJadwalController::class, 'create'])->name('pembina-jadwal.create');
+        Route::post('pembina-jadwal/store', [PembinaJadwalController::class, 'store'])->name('pembina-jadwal.store');
+        Route::get('pembina-jadwal/edit/{id}', [PembinaJadwalController::class, 'edit'])->name('pembina-jadwal.edit');
+        Route::post('pembina-jadwal/update/{id}', [PembinaJadwalController::class, 'update'])->name('pembina-jadwal.update');
+        Route::post('pembina-jadwal/destroy/{id}', [PembinaJadwalController::class, 'destroy'])->name('pembina-jadwal.destroy');
+
         // Data Pendaftaran
         Route::get('pembina-pendaftaran', [PembinaPendaftaranController::class, 'index'])->name('pembina-pendaftaran.index');
         Route::get('pembina-pendaftaran/create', [PembinaPendaftaranController::class, 'create'])->name('pembina-pendaftaran.create');
