@@ -19,6 +19,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\PemulihanPasswordController;
+use App\Http\Controllers\Ortu\OrtuPendaftaranController;
 use App\Http\Controllers\Pembina\PembinaDokumentasiController;
 use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
@@ -216,5 +217,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('pembina-pendaftaran/update/{id}', [PembinaPendaftaranController::class, 'update'])->name('pembina-pendaftaran.update');
         Route::post('pembina-pendaftaran/destroy/{id}', [PembinaPendaftaranController::class, 'destroy'])->name('pembina-pendaftaran.destroy');
         Route::post('/jquery-kelas/pembina', [PembinaPendaftaranController::class, 'jqueryKelas']);
+    });
+
+    // Orang Tua
+    Route::group(['middleware' => [CekLevel::class . ':3']], function () {
+
+        // Data Pendaftaran
+        Route::get('ortu-pendaftaran', [OrtuPendaftaranController::class, 'index'])->name('ortu-pendaftaran.index');
+        Route::get('ortu-pendaftaran/show/{id}', [OrtuPendaftaranController::class, 'show'])->name('ortu-pendaftaran.show');
     });
 });

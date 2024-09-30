@@ -213,6 +213,13 @@
                                 <span class="menu-title">Pendaftaran</span>
                             </a>
                         </li>
+                    @elseif (Auth()->user()->level_id == '3')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('ortu-pendaftaran.index') }}">
+                            <i class="mdi mdi-card-text-outline menu-icon"></i>
+                            <span class="menu-title">Pendaftaran</span>
+                        </a>
+                    </li>
                     @elseif (Auth()->user()->level_id == '4')
                     @endif
                 </ul>
