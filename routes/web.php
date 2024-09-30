@@ -19,6 +19,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\PemulihanPasswordController;
+use App\Http\Controllers\Pembina\PembinaDokumentasiController;
 use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
 use App\Http\Controllers\Pembina\PembinaSiswaController;
@@ -61,6 +62,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/edit-biodata/pembina/store', [DashboardController::class, 'storebiodatapembina']);
     Route::get('/edit-biodata/pembina/{id}', [DashboardController::class, 'editbiodatapembina']);
     Route::post('/edit-biodata/pembina/update/{id}', [DashboardController::class, 'updatebiodatapembina']);
+
+    // Orang Tua
+    Route::get('/isi-biodata/ortu', [DashboardController::class, 'isibiodataortu']);
+    Route::post('/edit-biodata/ortu/store', [DashboardController::class, 'storebiodataortu']);
+    Route::get('/edit-biodata/ortu/{id}', [DashboardController::class, 'editbiodataortu']);
+    Route::post('/edit-biodata/ortu/update/{id}', [DashboardController::class, 'updatebiodataortu']);
+    Route::post('/jquery-kelas/dashboard', [DashboardController::class, 'jqueryKelas']);
 
     // Siswa
     Route::get('/isi-biodata/siswa', [DashboardController::class, 'isibiodatasiswa']);
@@ -174,6 +182,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Pembina
     Route::group(['middleware' => [CekLevel::class . ':2']], function () {
+
+        // Data Dokumentasi
+        Route::get('pembina-dokumentasi', [PembinaDokumentasiController::class, 'index'])->name('pembina-dokumentasi.index');
+        Route::get('pembina-dokumentasi/create', [PembinaDokumentasiController::class, 'create'])->name('pembina-dokumentasi.create');
+        Route::post('pembina-dokumentasi/store', [PembinaDokumentasiController::class, 'store'])->name('pembina-dokumentasi.store');
+        Route::get('pembina-dokumentasi/edit/{id}', [PembinaDokumentasiController::class, 'edit'])->name('pembina-dokumentasi.edit');
+        Route::post('pembina-dokumentasi/update/{id}', [PembinaDokumentasiController::class, 'update'])->name('pembina-dokumentasi.update');
+        Route::post('pembina-dokumentasi/destroy/{id}', [PembinaDokumentasiController::class, 'destroy'])->name('pembina-dokumentasi.destroy');
 
         // Siswa
         Route::get('pembina-siswa', [PembinaSiswaController::class, 'index'])->name('pembina-siswa.index');

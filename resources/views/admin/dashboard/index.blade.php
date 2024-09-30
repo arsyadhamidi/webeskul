@@ -5,6 +5,8 @@
         @include('admin.index')
     @elseif (Auth()->user()->level_id == '2')
         @include('pembina.index')
+    @elseif (Auth()->user()->level_id == '3')
+        @include('ortu.index')
     @elseif (Auth()->user()->level_id == '4')
         @include('siswa.index')
     @endif

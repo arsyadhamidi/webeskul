@@ -43,6 +43,7 @@ class DashboardController extends Controller
         for ($i = 1; $i <= 12; $i++) {
             $dataPendaftar[] = $pendaftarPerBulan->get($i, 0);  // Jika tidak ada data untuk bulan tersebut, set 0
         }
+
         return view('admin.dashboard.index', [
             'users' => $users,
             'levels' => $levels,
@@ -58,86 +59,6 @@ class DashboardController extends Controller
             'dataPendaftar' => $dataPendaftar,
         ]);
     }
-
-    // Siswa
-    public function isibiodatasiswa()
-    {
-        $jurusans = Jurusan::latest()->get();
-        return view('siswa.isi-biodata', [
-            'jurusans' => $jurusans,
-        ]);
-    }
-
-    public function storebiodatasiswa(Request $request)
-    {
-        $validated = $request->validate([
-            'jurusan_id' => 'required',
-            'kelas_id' => 'required',
-            'nis' => 'required|unique:siswas,nis|max:255',
-            'nama' => 'required|max:255',
-            'jk' => 'required|max:255',
-        ], [
-
-            'jurusan_id.required' => 'Jurusan wajib diisi.',
-
-            'kelas_id.required' => 'Kelas wajib diisi.',
-
-            'nis.required' => 'NIS wajib diisi.',
-            'nis.unique' => 'NIS sudah terdaftar, silakan gunakan NISN lain.',
-            'nis.max' => 'NIS tidak boleh lebih dari 255 karakter.',
-
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
-
-            'jk.required' => 'Jenis kelamin wajib diisi.',
-            'jk.max' => 'Jenis kelamin tidak boleh lebih dari 255 karakter.',
-        ]);
-
-        $validated['users_id'] = Auth::user()->id;
-
-        Siswa::create($validated);
-
-        return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil menambahkan data !');
-    }
-
-    public function editbiodatasiswa($id)
-    {
-        $siswas = Siswa::where('id', $id)->first();
-        $jurusans = Jurusan::latest()->get();
-        return view('siswa.edit-biodata', [
-            'siswas' => $siswas,
-            'jurusans' => $jurusans,
-        ]);
-    }
-
-    public function updatebiodatasiswa(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'jurusan_id' => 'required',
-            'kelas_id' => 'required',
-            'nama' => 'required|max:255',
-            'jk' => 'required|max:255',
-        ], [
-            'users_id.required' => 'ID Pengguna wajib diisi.',
-
-            'jurusan_id.required' => 'Jurusan wajib diisi.',
-
-            'kelas_id.required' => 'Kelas wajib diisi.',
-
-            'nama.required' => 'Nama wajib diisi.',
-            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
-
-            'jk.required' => 'Jenis kelamin wajib diisi.',
-            'jk.max' => 'Jenis kelamin tidak boleh lebih dari 255 karakter.',
-        ]);
-
-        $validated['users_id'] = Auth::user()->id;
-
-        Siswa::where('id', $id)->update($validated);
-
-        return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil memperbaharui data !');
-    }
-
 
     // Pembina
     public function isibiodatapembina()
@@ -229,6 +150,168 @@ class DashboardController extends Controller
         $validated['users_id'] = Auth::user()->id;
 
         Pembina::where('id', $id)->update($validated);
+
+        return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil memperbaharui data !');
+    }
+
+    // Siswa
+    public function isibiodatasiswa()
+    {
+        $jurusans = Jurusan::latest()->get();
+        return view('siswa.isi-biodata', [
+            'jurusans' => $jurusans,
+        ]);
+    }
+
+    public function storebiodatasiswa(Request $request)
+    {
+        $validated = $request->validate([
+            'jurusan_id' => 'required',
+            'kelas_id' => 'required',
+            'nis' => 'required|unique:siswas,nis|max:255',
+            'nama' => 'required|max:255',
+            'jk' => 'required|max:255',
+        ], [
+
+            'jurusan_id.required' => 'Jurusan wajib diisi.',
+
+            'kelas_id.required' => 'Kelas wajib diisi.',
+
+            'nis.required' => 'NIS wajib diisi.',
+            'nis.unique' => 'NIS sudah terdaftar, silakan gunakan NISN lain.',
+            'nis.max' => 'NIS tidak boleh lebih dari 255 karakter.',
+
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
+            'jk.required' => 'Jenis kelamin wajib diisi.',
+            'jk.max' => 'Jenis kelamin tidak boleh lebih dari 255 karakter.',
+        ]);
+
+        $validated['users_id'] = Auth::user()->id;
+
+        Siswa::create($validated);
+
+        return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil menambahkan data !');
+    }
+
+    public function editbiodatasiswa($id)
+    {
+        $siswas = Siswa::where('id', $id)->first();
+        $jurusans = Jurusan::latest()->get();
+        return view('siswa.edit-biodata', [
+            'siswas' => $siswas,
+            'jurusans' => $jurusans,
+        ]);
+    }
+
+    public function updatebiodatasiswa(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'jurusan_id' => 'required',
+            'kelas_id' => 'required',
+            'nama' => 'required|max:255',
+            'jk' => 'required|max:255',
+        ], [
+            'users_id.required' => 'ID Pengguna wajib diisi.',
+
+            'jurusan_id.required' => 'Jurusan wajib diisi.',
+
+            'kelas_id.required' => 'Kelas wajib diisi.',
+
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
+            'jk.required' => 'Jenis kelamin wajib diisi.',
+            'jk.max' => 'Jenis kelamin tidak boleh lebih dari 255 karakter.',
+        ]);
+
+        $validated['users_id'] = Auth::user()->id;
+
+        Siswa::where('id', $id)->update($validated);
+
+        return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil memperbaharui data !');
+    }
+
+    // Orang Tua
+    public function isibiodataortu()
+    {
+        $siswas = Siswa::latest()->get();
+        return view('ortu.isi-biodata', [
+            'siswas' => $siswas,
+        ]);
+    }
+
+    public function storebiodataortu(Request $request)
+    {
+        $validated = $request->validate([
+            'siswa_id' => 'required',
+            'nama' => 'required|max:255',
+            'jk' => 'required|max:255',
+            'telp' => 'required|min:10|max:15',
+            'alamat' => 'required|max:500',
+        ], [
+            'siswa_id.required' => 'Siswa wajib dipilih.',
+
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
+            'jk.required' => 'Jenis kelamin wajib diisi.',
+            'jk.max' => 'Jenis kelamin tidak boleh lebih dari 255 karakter.',
+
+            'telp.required' => 'Nomor telepon wajib diisi.',
+            'telp.min' => 'Nomor telepon harus minimal 10 angka.',
+            'telp.max' => 'Nomor telepon tidak boleh lebih dari 15 angka.',
+
+            'alamat.required' => 'Alamat wajib diisi.',
+            'alamat.max' => 'Alamat tidak boleh lebih dari 500 karakter.',
+        ]);
+
+        $validated['users_id'] = Auth::user()->id;
+
+        OrangTua::create($validated);
+
+        return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil menambahkan data !');
+    }
+
+    public function editbiodataortu($id)
+    {
+        $ortus = OrangTua::where('id', $id)->first();
+        $siswas = Siswa::latest()->get();
+        return view('ortu.edit-biodata', [
+            'ortus' => $ortus,
+            'siswas' => $siswas,
+        ]);
+    }
+
+    public function updatebiodataortu(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'siswa_id' => 'required',
+            'nama' => 'required|max:255',
+            'jk' => 'required|max:255',
+            'telp' => 'required|min:10|max:15',
+            'alamat' => 'required|max:500',
+        ], [
+            'siswa_id.required' => 'Siswa wajib dipilih.',
+
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+
+            'jk.required' => 'Jenis kelamin wajib diisi.',
+            'jk.max' => 'Jenis kelamin tidak boleh lebih dari 255 karakter.',
+
+            'telp.required' => 'Nomor telepon wajib diisi.',
+            'telp.min' => 'Nomor telepon harus minimal 10 angka.',
+            'telp.max' => 'Nomor telepon tidak boleh lebih dari 15 angka.',
+
+            'alamat.required' => 'Alamat wajib diisi.',
+            'alamat.max' => 'Alamat tidak boleh lebih dari 500 karakter.',
+        ]);
+
+        $validated['users_id'] = Auth::user()->id;
+
+        OrangTua::where('id', $id)->update($validated);
 
         return redirect('/dashboard')->with('success', 'Selamat ! Anda berhasil memperbaharui data !');
     }
