@@ -15,6 +15,9 @@ class OrtuPendaftaranController extends Controller
         $users = Auth::user();
         $ortus = OrangTua::where('users_id', $users->id)->first();
         $daftars = Pendaftaran::where('siswa_id', $ortus->siswa_id)->latest()->get();
+        if (!$daftars) {
+            return redirect('/dashboard')->withErrors(['error' => 'Data siswa mendaftar tidak ditemukan.']);
+        }
 
         return view('ortu.pendaftaran.index', [
             'daftars' => $daftars,

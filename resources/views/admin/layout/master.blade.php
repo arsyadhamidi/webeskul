@@ -226,7 +226,7 @@
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('ortu-jadwal.index') }}">Jadwal Ekskul</a></li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('pembina-dokumentasi.index') }}">Dokumentasi</a></li>
+                                        href="{{ route('ortu-dokumentasi.index') }}">Dokumentasi</a></li>
                             </ul>
                         </div>
                     </li>

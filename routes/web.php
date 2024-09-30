@@ -19,6 +19,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\PemulihanPasswordController;
+use App\Http\Controllers\Ortu\OrtuDokumentasiController;
 use App\Http\Controllers\Ortu\OrtuJadwalController;
 use App\Http\Controllers\Ortu\OrtuPendaftaranController;
 use App\Http\Controllers\Pembina\PembinaDokumentasiController;
@@ -222,6 +223,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Orang Tua
     Route::group(['middleware' => [CekLevel::class . ':3']], function () {
+
+        // Data Dokumentasi
+        Route::get('ortu-dokumentasi', [OrtuDokumentasiController::class, 'index'])->name('ortu-dokumentasi.index');
 
         // Data Pendaftaran
         Route::get('ortu-pendaftaran', [OrtuPendaftaranController::class, 'index'])->name('ortu-pendaftaran.index');
