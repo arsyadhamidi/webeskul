@@ -199,7 +199,7 @@
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('data-siswa.index') }}">Data Siswa</a></li>
+                                        href="{{ route('pembina-siswa.index') }}">Data Siswa</a></li>
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('pembina-jadwal.index') }}">Jadwal Ekskul</a></li>
                             </ul>

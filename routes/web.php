@@ -21,6 +21,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\PemulihanPasswordController;
 use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
+use App\Http\Controllers\Pembina\PembinaSiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,6 +174,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Pembina
     Route::group(['middleware' => [CekLevel::class . ':2']], function () {
+
+        // Siswa
+        Route::get('pembina-siswa', [PembinaSiswaController::class, 'index'])->name('pembina-siswa.index');
+        Route::get('pembina-siswa/create', [PembinaSiswaController::class, 'create'])->name('pembina-siswa.create');
+        Route::post('pembina-siswa/store', [PembinaSiswaController::class, 'store'])->name('pembina-siswa.store');
+        Route::get('pembina-siswa/edit/{id}', [PembinaSiswaController::class, 'edit'])->name('pembina-siswa.edit');
+        Route::post('pembina-siswa/update/{id}', [PembinaSiswaController::class, 'update'])->name('pembina-siswa.update');
+        Route::post('pembina-siswa/destroy/{id}', [PembinaSiswaController::class, 'destroy'])->name('pembina-siswa.destroy');
 
         // Data Jadwal
         Route::get('pembina-jadwal', [PembinaJadwalController::class, 'index'])->name('pembina-jadwal.index');
