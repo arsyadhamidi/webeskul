@@ -19,6 +19,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\PemulihanPasswordController;
+use App\Http\Controllers\Ortu\OrtuJadwalController;
 use App\Http\Controllers\Ortu\OrtuPendaftaranController;
 use App\Http\Controllers\Pembina\PembinaDokumentasiController;
 use App\Http\Controllers\Pembina\PembinaJadwalController;
@@ -225,5 +226,8 @@ Route::middleware(['auth'])->group(function () {
         // Data Pendaftaran
         Route::get('ortu-pendaftaran', [OrtuPendaftaranController::class, 'index'])->name('ortu-pendaftaran.index');
         Route::get('ortu-pendaftaran/show/{id}', [OrtuPendaftaranController::class, 'show'])->name('ortu-pendaftaran.show');
+
+        // Data Jadwal
+        Route::get('ortu-jadwal', [OrtuJadwalController::class, 'index'])->name('ortu-jadwal.index');
     });
 });
