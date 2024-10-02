@@ -26,6 +26,7 @@ use App\Http\Controllers\Pembina\PembinaDokumentasiController;
 use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
 use App\Http\Controllers\Pembina\PembinaSiswaController;
+use App\Http\Controllers\Siswa\SiswaDaftarEskulController;
 
 /*
 |--------------------------------------------------------------------------
@@ -233,5 +234,14 @@ Route::middleware(['auth'])->group(function () {
 
         // Data Jadwal
         Route::get('ortu-jadwal', [OrtuJadwalController::class, 'index'])->name('ortu-jadwal.index');
+    });
+
+    // Siswa
+    Route::group(['middleware' => [CekLevel::class . ':4']], function () {
+
+        // Daftar Eskul
+        Route::get('/daftar-eskul', [SiswaDaftarEskulController::class, 'index'])->name('daftar-eskul.index');
+        Route::get('/daftar-eskul/create/{id}', [SiswaDaftarEskulController::class, 'create'])->name('daftar-eskul.create');
+        Route::post('/daftar-eskul/store', [SiswaDaftarEskulController::class, 'store'])->name('daftar-eskul.store');
     });
 });

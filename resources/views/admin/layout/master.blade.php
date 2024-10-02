@@ -214,29 +214,35 @@
                             </a>
                         </li>
                     @elseif (Auth()->user()->level_id == '3')
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                            aria-controls="ui-basic">
-                            <i class="menu-icon mdi mdi-floor-plan"></i>
-                            <span class="menu-title">Data Master</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('ortu-jadwal.index') }}">Jadwal Ekskul</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('ortu-dokumentasi.index') }}">Dokumentasi</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('ortu-pendaftaran.index') }}">
-                            <i class="mdi mdi-card-text-outline menu-icon"></i>
-                            <span class="menu-title">Pendaftaran</span>
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                                aria-controls="ui-basic">
+                                <i class="menu-icon mdi mdi-floor-plan"></i>
+                                <span class="menu-title">Data Master</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-basic">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link"
+                                            href="{{ route('ortu-jadwal.index') }}">Jadwal Ekskul</a></li>
+                                    <li class="nav-item"> <a class="nav-link"
+                                            href="{{ route('ortu-dokumentasi.index') }}">Dokumentasi</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('ortu-pendaftaran.index') }}">
+                                <i class="mdi mdi-card-text-outline menu-icon"></i>
+                                <span class="menu-title">Pendaftaran</span>
+                            </a>
+                        </li>
                     @elseif (Auth()->user()->level_id == '4')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('daftar-eskul.index') }}">
+                                <i class="mdi mdi-card-text-outline menu-icon"></i>
+                                <span class="menu-title">Daftar Ekskul</span>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </nav>

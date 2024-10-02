@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pendaftarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('eskul_id');
+            $table->foreignId('eskul_id'); //
             $table->foreignId('siswa_id');
             $table->foreignId('jurusan_id');
             $table->foreignId('kelas_id');
