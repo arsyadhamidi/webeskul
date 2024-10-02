@@ -19,6 +19,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Auth\LupaPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\PemulihanPasswordController;
+use App\Http\Controllers\Landing\LandingController;
 use App\Http\Controllers\Ortu\OrtuDokumentasiController;
 use App\Http\Controllers\Ortu\OrtuJadwalController;
 use App\Http\Controllers\Ortu\OrtuPendaftaranController;
@@ -41,6 +42,9 @@ use App\Http\Controllers\Siswa\SiswaRiwayatPendaftaranController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Landing
+Route::get('/', [LandingController::class, 'index']);
 
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
