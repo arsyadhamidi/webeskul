@@ -20,4 +20,9 @@ class Dokumentasi extends Model
     {
         return $this->belongsTo(Pembina::class, 'pembina_id');
     }
+
+    public function pendaftaran()
+    {
+        return $this->belongsTo(Pendaftaran::class, 'eskul_id', 'eskul_id');
+    }
 }

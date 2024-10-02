@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrtuJadwalController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $user = Auth::user();
         $ortu = OrangTua::where('users_id', $user->id)->first();
@@ -22,7 +22,7 @@ class OrtuJadwalController extends Controller
         }
 
         // Ambil semua data pendaftaran siswa terkait
-        $daftars = Pendaftaran::where('siswa_id', $ortu->siswa_id)->latest()->get();
+        $daftars = Pendaftaran::where('siswa_id', $ortu->siswa_id)->where('status', 'Diterima')->latest()->get();
 
         // Siapkan array atau collection untuk menyimpan semua jadwal
         $allJadwals = collect();

@@ -261,7 +261,7 @@
                                     <li class="nav-item"> <a class="nav-link"
                                             href="{{ route('siswa-jadwal.index') }}">Jadwal Ekskul</a></li>
                                     <li class="nav-item"> <a class="nav-link"
-                                            href="{{ route('ortu-dokumentasi.index') }}">Dokumentasi</a></li>
+                                            href="{{ route('siswa-dokumentasi.index') }}">Dokumentasi</a></li>
                                 </ul>
                             </div>
                         </li>

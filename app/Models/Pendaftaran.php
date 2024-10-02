@@ -30,4 +30,9 @@ class Pendaftaran extends Model
     {
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
+
+    public function dokumentasi()
+    {
+        return $this->hasMany(Dokumentasi::class, 'eskul_id', 'eskul_id');
+    }
 }

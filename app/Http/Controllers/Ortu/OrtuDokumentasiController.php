@@ -22,7 +22,7 @@ class OrtuDokumentasiController extends Controller
         }
 
         // Ambil semua data pendaftaran siswa terkait
-        $daftars = Pendaftaran::where('siswa_id', $ortu->siswa_id)->latest()->get();
+        $daftars = Pendaftaran::where('siswa_id', $ortu->siswa_id)->where('status', 'Diterima')->latest()->get();
 
         // Siapkan array atau collection untuk menyimpan semua dokumentasi
         $allDokumentasis = collect();

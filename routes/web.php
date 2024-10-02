@@ -27,6 +27,7 @@ use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
 use App\Http\Controllers\Pembina\PembinaSiswaController;
 use App\Http\Controllers\Siswa\SiswaDaftarEskulController;
+use App\Http\Controllers\Siswa\SiswaDokumentasiController;
 use App\Http\Controllers\Siswa\SiswaJadwalController;
 use App\Http\Controllers\Siswa\SiswaRiwayatPendaftaranController;
 
@@ -240,6 +241,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Siswa
     Route::group(['middleware' => [CekLevel::class . ':4']], function () {
+
+        // Dokumentasi Siswa
+        Route::get('/siswa-dokumentasi', [SiswaDokumentasiController::class, 'index'])->name('siswa-dokumentasi.index');
 
         // Jadwal Siswa
         Route::get('/siswa-jadwal', [SiswaJadwalController::class, 'index'])->name('siswa-jadwal.index');
