@@ -243,6 +243,12 @@
                                 <span class="menu-title">Daftar Ekskul</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('riwayat-pendaftaran.index') }}">
+                                <i class="mdi mdi-floor-plan menu-icon"></i>
+                                <span class="menu-title">Riwayat Daftar</span>
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </nav>

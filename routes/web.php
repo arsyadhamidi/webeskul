@@ -27,6 +27,7 @@ use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
 use App\Http\Controllers\Pembina\PembinaSiswaController;
 use App\Http\Controllers\Siswa\SiswaDaftarEskulController;
+use App\Http\Controllers\Siswa\SiswaRiwayatPendaftaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -243,5 +244,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/daftar-eskul', [SiswaDaftarEskulController::class, 'index'])->name('daftar-eskul.index');
         Route::get('/daftar-eskul/create/{id}', [SiswaDaftarEskulController::class, 'create'])->name('daftar-eskul.create');
         Route::post('/daftar-eskul/store', [SiswaDaftarEskulController::class, 'store'])->name('daftar-eskul.store');
+
+        // Riwayat Pendaftaran
+        Route::get('/riwayat-pendaftaran', [SiswaRiwayatPendaftaranController::class, 'index'])->name('riwayat-pendaftaran.index');
+        Route::get('/riwayat-pendaftaran/show/{id}', [SiswaRiwayatPendaftaranController::class, 'show'])->name('riwayat-pendaftaran.show');
+        Route::post('/riwayat-pendaftaran/destroy/{id}', [SiswaRiwayatPendaftaranController::class, 'destroy'])->name('riwayat-pendaftaran.destroy');
     });
 });
