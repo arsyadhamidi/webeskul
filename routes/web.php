@@ -25,6 +25,7 @@ use App\Http\Controllers\Ortu\OrtuAbsensiController;
 use App\Http\Controllers\Ortu\OrtuDokumentasiController;
 use App\Http\Controllers\Ortu\OrtuJadwalController;
 use App\Http\Controllers\Ortu\OrtuPendaftaranController;
+use App\Http\Controllers\Pembina\PembinaAbsensiController;
 use App\Http\Controllers\Pembina\PembinaDokumentasiController;
 use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
@@ -207,6 +208,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Pembina
     Route::group(['middleware' => [CekLevel::class . ':2']], function () {
+
+        // Absensi
+        Route::get('/pembina-absensi', [PembinaAbsensiController::class, 'index'])->name('pembina-absensi.index');
 
         // Data Dokumentasi
         Route::get('pembina-dokumentasi', [PembinaDokumentasiController::class, 'index'])->name('pembina-dokumentasi.index');
