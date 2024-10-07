@@ -166,6 +166,12 @@
                             </div>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('data-absensi.index') }}">
+                                <i class="mdi mdi-card-text-outline menu-icon"></i>
+                                <span class="menu-title">Data Absensi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('data-pendaftaran.index') }}">
                                 <i class="mdi mdi-card-text-outline menu-icon"></i>
                                 <span class="menu-title">Pendaftaran</span>

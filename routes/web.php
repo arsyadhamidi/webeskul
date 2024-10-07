@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAbsensiController;
 use App\Http\Controllers\Admin\AdminDokumentasiController;
 use App\Http\Controllers\Admin\AdminEskulController;
 use App\Http\Controllers\Admin\AdminJadwalController;
@@ -98,6 +99,15 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin
     Route::group(['middleware' => [CekLevel::class . ':1']], function () {
+
+        // Absensi
+        Route::get('/data-absensi', [AdminAbsensiController::class, 'index'])->name('data-absensi.index');
+        Route::get('/data-absensi/create', [AdminAbsensiController::class, 'create'])->name('data-absensi.create');
+        Route::post('/data-absensi/store', [AdminAbsensiController::class, 'store'])->name('data-absensi.store');
+        Route::get('/data-absensi/edit/{id}', [AdminAbsensiController::class, 'edit'])->name('data-absensi.edit');
+        Route::post('/data-absensi/update/{id}', [AdminAbsensiController::class, 'update'])->name('data-absensi.update');
+        Route::post('/data-absensi/destroy/{id}', [AdminAbsensiController::class, 'destroy'])->name('data-absensi.destroy');
+        Route::post('/data-absensi/jqueryeskul', [AdminAbsensiController::class, 'jqueryEskul']);
 
         // Data Dokumentasi
         Route::get('data-dokumentasi', [AdminDokumentasiController::class, 'index'])->name('data-dokumentasi.index');
