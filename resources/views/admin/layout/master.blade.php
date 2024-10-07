@@ -244,6 +244,12 @@
                         </li>
                     @elseif (Auth()->user()->level_id == '4')
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('siswa-absensi.index') }}">
+                                <i class="mdi mdi-card-text-outline menu-icon"></i>
+                                <span class="menu-title">Ambil Absensi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('daftar-eskul.index') }}">
                                 <i class="mdi mdi-card-text-outline menu-icon"></i>
                                 <span class="menu-title">Daftar Ekskul</span>

@@ -28,6 +28,7 @@ use App\Http\Controllers\Pembina\PembinaDokumentasiController;
 use App\Http\Controllers\Pembina\PembinaJadwalController;
 use App\Http\Controllers\Pembina\PembinaPendaftaranController;
 use App\Http\Controllers\Pembina\PembinaSiswaController;
+use App\Http\Controllers\Siswa\SiswaAbsensiController;
 use App\Http\Controllers\Siswa\SiswaDaftarEskulController;
 use App\Http\Controllers\Siswa\SiswaDokumentasiController;
 use App\Http\Controllers\Siswa\SiswaJadwalController;
@@ -258,6 +259,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Siswa
     Route::group(['middleware' => [CekLevel::class . ':4']], function () {
+
+        // Absensi
+        Route::get('/siswa-absensi', [SiswaAbsensiController::class, 'index'])->name('siswa-absensi.index');
+        Route::get('/siswa-absensi/create', [SiswaAbsensiController::class, 'create'])->name('siswa-absensi.create');
+        Route::post('/siswa-absensi/store', [SiswaAbsensiController::class, 'store'])->name('siswa-absensi.store');
+        Route::get('/siswa-absensi/edit/{id}', [SiswaAbsensiController::class, 'edit'])->name('siswa-absensi.edit');
+        Route::post('/siswa-absensi/update/{id}', [SiswaAbsensiController::class, 'update'])->name('siswa-absensi.update');
+        Route::post('/siswa-absensi/destroy/{id}', [SiswaAbsensiController::class, 'destroy'])->name('siswa-absensi.destroy');
 
         // Dokumentasi Siswa
         Route::get('/siswa-dokumentasi', [SiswaDokumentasiController::class, 'index'])->name('siswa-dokumentasi.index');
