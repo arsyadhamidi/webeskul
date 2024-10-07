@@ -100,6 +100,10 @@
                         <i class="fa fa-plus"></i>
                         Tambahkan Data
                     </a>
+                    <a href="{{ route('data-pendaftaran.generatepdf') }}" class="btn btn-danger" target="_blank">
+                        <i class="fa fa-download"></i>
+                        Download PDF
+                    </a>
                 </div>
                 <div class="card-body table-responsive">
                     <h4 class="card-title">List Data Pendaftaran</h4>

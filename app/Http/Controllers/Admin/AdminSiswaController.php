@@ -8,6 +8,7 @@ use App\Models\Siswa;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class AdminSiswaController extends Controller
 {
@@ -36,6 +37,15 @@ class AdminSiswaController extends Controller
             'siswas' => $siswas,
             'jurusans' => $jurusans,
         ]);
+    }
+
+    public function generatepdf()
+    {
+    	$siswas = Siswa::latest()->get();
+
+    	$pdf = PDF::loadview('admin.siswa.export-pdf',['siswas'=>$siswas])->setPaper('A4', 'Potrait');
+    	return $pdf->stream('laporan-siswa.pdf');
+    	// return $pdf->download('laporan-siswa.pdf');
     }
 
     public function create()

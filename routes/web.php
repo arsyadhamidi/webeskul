@@ -118,6 +118,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Data Pendaftaran
         Route::get('data-pendaftaran', [AdminPendaftaranController::class, 'index'])->name('data-pendaftaran.index');
+        Route::get('data-pendaftaran/generatepdf', [AdminPendaftaranController::class, 'generatepdf'])->name('data-pendaftaran.generatepdf');
         Route::get('data-pendaftaran/create', [AdminPendaftaranController::class, 'create'])->name('data-pendaftaran.create');
         Route::post('data-pendaftaran/store', [AdminPendaftaranController::class, 'store'])->name('data-pendaftaran.store');
         Route::get('data-pendaftaran/edit/{id}', [AdminPendaftaranController::class, 'edit'])->name('data-pendaftaran.edit');
@@ -151,6 +152,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Siswa
         Route::get('data-siswa', [AdminSiswaController::class, 'index'])->name('data-siswa.index');
+        Route::get('data-siswa/generatepdf', [AdminSiswaController::class, 'generatepdf'])->name('data-siswa.generatepdf');
         Route::get('data-siswa/create', [AdminSiswaController::class, 'create'])->name('data-siswa.create');
         Route::post('data-siswa/store', [AdminSiswaController::class, 'store'])->name('data-siswa.store');
         Route::get('data-siswa/edit/{id}', [AdminSiswaController::class, 'edit'])->name('data-siswa.edit');
@@ -220,6 +222,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Data Pendaftaran
         Route::get('pembina-pendaftaran', [PembinaPendaftaranController::class, 'index'])->name('pembina-pendaftaran.index');
+        Route::get('pembina-pendaftaran/generatepdf', [PembinaPendaftaranController::class, 'generatepdf'])->name('pembina-pendaftaran.generatepdf');
         Route::get('pembina-pendaftaran/create', [PembinaPendaftaranController::class, 'create'])->name('pembina-pendaftaran.create');
         Route::post('pembina-pendaftaran/store', [PembinaPendaftaranController::class, 'store'])->name('pembina-pendaftaran.store');
         Route::get('pembina-pendaftaran/edit/{id}', [PembinaPendaftaranController::class, 'edit'])->name('pembina-pendaftaran.edit');

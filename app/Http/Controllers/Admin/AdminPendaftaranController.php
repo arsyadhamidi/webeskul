@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class AdminPendaftaranController extends Controller
 {
@@ -57,6 +58,15 @@ class AdminPendaftaranController extends Controller
             'eskuls' => $eskuls,
             'jurusans' => $jurusans,
         ]);
+    }
+
+    public function generatepdf()
+    {
+    	$daftars = Pendaftaran::latest()->get();
+
+    	$pdf = PDF::loadview('admin.pendaftaran.export-pdf',['daftars'=>$daftars])->setPaper('A4', 'Potrait');
+    	return $pdf->stream('laporan-pendaftaran.pdf');
+    	// return $pdf->download('laporan-siswa.pdf');
     }
 
     public function create()

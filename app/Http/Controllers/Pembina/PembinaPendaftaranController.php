@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pembina;
 
+use PDF;
 use Carbon\Carbon;
 use App\Models\Eskul;
 use App\Models\Kelas;
@@ -53,6 +54,15 @@ class PembinaPendaftaranController extends Controller
             'daftars' => $daftars,
             'jurusans' => $jurusans,
         ]);
+    }
+
+    public function generatepdf()
+    {
+    	$daftars = Pendaftaran::latest()->get();
+
+    	$pdf = PDF::loadview('pembina.pendaftaran.export-pdf',['daftars'=>$daftars])->setPaper('A4', 'Potrait');
+    	return $pdf->stream('laporan-pendaftaran.pdf');
+    	// return $pdf->download('laporan-siswa.pdf');
     }
 
     public function create()
